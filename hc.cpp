@@ -11,6 +11,13 @@
 // dec order of book score scanning per lib
 
 #include <bits/stdc++.h>
+using namespace std;
+
+// Compares two book scores
+bool compareBookScores(int book_scores[], int book1, int book2)
+{
+    return (book_scores[book1] > book_scores[book2]);
+}
 
 int main() {
 
@@ -26,7 +33,7 @@ int main() {
     cin>>scores[i];
 
   int lib_total_books[l];
-  map<int, int> lib_signup_days[l]; // #days => #lib
+  map<int, int> lib_signup_days; // #days => #lib
   int lib_books_shipped_per_day[l];
   vector<vector<int>> lib_books_set;
   vector<vector<int>> books_to_scan_set; //
@@ -58,4 +65,13 @@ int main() {
     }
     books_to_scan_set.push_back(books_picked_this_lib);
   }
+
+  // sort desc the lib book set on book score for each lib
+  for (int i = 0; i < l; i++) {
+    books_picked_this_lib = books_to_scan_set[i];
+    sort(books_picked_this_lib.begin(), books_picked_this_lib.end(), compareBookScores);
+  }
+
+  // get max per day score for each lib || make daywise max score set for each lib
+
 }
